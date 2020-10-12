@@ -19,9 +19,13 @@ public class CDAccount extends BankAccount{
 			this.offering = offering;
 			this.date = date;
 			
-			accountNumber = accInt++;
 	}
+
+	public CDOffering getOffering() {
+		return offering;
 	
+	}
+
 	public double getBalance() {
 		return balance;
 	}

@@ -3,9 +3,12 @@ package com.meritamerica.assignment2;
 public class BankAccount {
 	protected double interestRate;  
 	protected double balance;
+	
 
 	   
-	
+	public BankAccount(double balance) {
+		this.balance = balance;
+	}
 	public BankAccount(double balance, double interestRate)
 	{
 		 this.interestRate = interestRate;

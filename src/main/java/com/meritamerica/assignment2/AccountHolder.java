@@ -10,9 +10,14 @@ public class AccountHolder {
 	private String lastName = "";
 	private String ssn = "";
 	
+
+	
 	CheckingAccount checkingaccount;
 	SavingsAccount savingaccount;
 	
+	CheckingAccount[] checkingAccount = new CheckingAccount[0];
+	SavingsAccount[] savingsAccount = new SavingsAccount[0];
+	CDAccount[] cdAccount = new CDAccount[0];
 	
 	//The parameters for the account holder
 	public AccountHolder(String firstName, String middleName, String lastName, String ssn) 
@@ -58,85 +63,129 @@ public class AccountHolder {
 		this.ssn = ssn;
 	}
 	
-	CheckingAccount addCheckingAccount(double openingBalance) 
-	{
-		return;
+	public void  addCheckingAccount(double openingBalance) {
+		CheckingAccount cha = new CheckingAccount(openingBalance);
+		CheckingAccount[] tempChecking = new CheckingAccount[checkingAccount.length + 1];
+		if(getCheckingBalance() + getSavingsBalance() + openingBalance > 250_000) {
+			return;
+		}
+		for(int i = 0; i < checkingAccount.length; i++) {
+			tempChecking[i] = checkingAccount[i]; 
+		}
+		checkingAccount = tempChecking;
+		checkingAccount[checkingAccount.length - 1] = cha;
 	}
-	CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
-		return;
+	public void addCheckingAccount(CheckingAccount checkingAccount) {
+		CheckingAccount[] temp = new CheckingAccount[this.checkingAccount.length + 1];
+		if(getCheckingBalance() + getSavingsBalance() + checkingAccount.balance > 250_000) {
+			return;
+		}
+		for(int i = 0; i < this.checkingAccount.length; i++) {
+			temp[i] = this.checkingAccount[i];
+		}
+		this.checkingAccount = temp;
+		this.checkingAccount[this.checkingAccount.length - 1] = checkingAccount;
 	}
 	CheckingAccount[] getCheckingAccounts() {
 		return checkingAccount;
 	}
-	public int getNumberOfCheckingAccounts()
-	{
-		
+	public int getNumberOfCheckingAccounts(){
+		return checkingAccount.length;
 	}
-	public double getCheckingBalance()
-	{
-		
+	// total value of this user's total checking accounts
+	public double getCheckingBalance(){
+		double total = 0;
+		for (int i = 0; i < checkingAccount.length; i++) {
+			total += checkingAccount[i].getBalance();
+		}
+		return total; 
 	}
-	SavingsAccount addSavingsAccount(double openingBalance)
-	{
-	return;	
+	public void addSavingsAccount(double openingBalance){
+		//are the accounts combined more than 250k
+		// if not, then what
+		// if so, then what
+		SavingsAccount rho = new SavingsAccount(openingBalance);
+		SavingsAccount[] tempChecking = new SavingsAccount[savingsAccount.length + 1];
+		if(getCheckingBalance() + getSavingsBalance() + openingBalance > 250_000) {
+			return;
+		}
+		for(int i = 0; i < savingsAccount.length; i++) {
+			tempChecking[i] = savingsAccount[i]; 
+		}
+		savingsAccount = tempChecking;
+		savingsAccount[checkingAccount.length - 1] = rho;
 	}
-	SavingsAccount addSavingsAccount(SavingsAccount savingsAccount)
-	{
-	return;	
+	public void addSavingsAccount(SavingsAccount savingsAccount){
+		//are the accounts combined more than 250k
+		// if not, then what
+		// if so, then what 
+		// make new array (+1 in length form initial array)
+		//loop through old array, adding elements to new array
+		//old array = new array
+		//add new element to array at length-1 position
+		//new array will be deleted when this method finishes execution
+		SavingsAccount[] temp = new SavingsAccount[this.savingsAccount.length + 1];
+		if(getCheckingBalance() + getSavingsBalance() + savingsAccount.balance > 250_000) {
+			return;
+		}
+		for(int i = 0; i < this.savingsAccount.length; i++) {
+			temp[i] = this.savingsAccount[i];
+		}
+		this.savingsAccount = temp;
+		this.savingsAccount[this.checkingAccount.length - 1] = savingsAccount;
+	
 	}
 	SavingsAccount[] getSavingsAccount() {
+		return savingsAccount;
 	}
-		return savingaccount;
+	public int getNumberOfSavingsAccounts(){
+		return  savingsAccount.length; 
 	}
-	public int getNumberOfSavingsAccounts()
-	{
-		
-	}
-	public double getSavingsBalance()
-	{
-		
-	}
-	CDAccount addCDAccount (CDOffering offering, double openingBalance)
-	{
-		
+	public double getSavingsBalance(){
+		double total = 0;
+		for (int i = 0; i < savingsAccount.length; i++) {
+			total += savingsAccount[i].getBalance();
+		}
+		return total;
 	}
 	
-	CDAccount addCDAccount(CDAccount cdAccount)
-	{
-		
-	}
-	CDAccount[] getCDAccounts() 
-	{
-		
-	}
-	public int getNumberOfCDAccounts()
-	{
-		
-	}
-	public double getCDBalance()
-	{
-		
+	
+	public void  addCDAccount(CDOffering offering, double openingBalance){
+		CDAccount tao = new CDAccount(offering, openingBalance);
+		CDAccount[] tempCD = new CDAccount[checkingAccount.length + 1];
+		for(int i = 0; i < cdAccount.length; i++) {
+			tempCD[i] = cdAccount[i]; 
+		}
+		cdAccount = tempCD;
+		cdAccount[checkingAccount.length - 1] = tao;
 	}
 	
-	public double getCombinedBalance()
-	{
+	public void addCDAccount(CDAccount cdAccount){
+		CDAccount[] tempCD = new CDAccount[this.cdAccount.length + 1];
+		for(int i = 0; i < this.cdAccount.length; i++) {
+			tempCD[i] = this.cdAccount[i]; 
+		}
+		this.cdAccount = tempCD;
+		this.cdAccount[this.cdAccount.length - 1] = cdAccount;
+	}
+		
+	CDAccount[] getCDAccounts() {
+		return cdAccount;
+		
+	}
+	public int getNumberOfCDAccounts(){
+		return cdAccount.length;
+	}
+	public double getCDBalance(){
+			double total = 0;
+			for (int i = 0; i < cdAccount.length; i++) {
+				total += cdAccount[i].getBalance();
+			}
+			return total; 
+	}
+	
+	public double getCombinedBalance(){
+		return (getCDBalance() + getSavingsBalance() + getCheckingBalance());
 
-	}
-	
-	
-		
-	
-	public String toString() {
-		DecimalFormat decf = new DecimalFormat("0.##");
-		
-		return "Acount holders name: " + firstName + " " + middleName + " " + lastName + "\n"
-				+ "Social Security number: " + ssn + "\n"
-				+ "The checking account balance: " + decf.format(checkingaccount.getTheBalance()) + "\n"
-				+ "The saving account balance:" + decf.format(savingaccount.getTheBalance()) + "\n"
-				+ "Checking Account balance in 3 years: " + decf.format(checkingaccount.interestVal(3)) + "\n"
-				+ "Savings Account balance in 3 n years: " + decf.format(savingaccount.interestVal(3)) + "\n"
-				+ "The Checking Account with an interest rate of: " + checkingaccount.getIntRate() + "\n"
-				+ "The Savings Account with an interest rate of: " + savingaccount.getIntRate();
-		
 	}
 }
