@@ -10,25 +10,59 @@ public class MeritBank {
 	private static CDOffering bestCDOffering;
 	private static CDOffering secondBestCDOffering;
 	private double depositAmount;
-	Private static int counterA - 0;
+	private static long nextAccountNumber = 00000001;
 	
-	public static void addAccountHolder(AccountHolder accountHolder) {
-	if (counterA == accounts.length) {
-		AccountHolder[] newASccounts = new AccountHolder[counterA + 1];
-		for(int i =0; i <counterA; i++) {
-			newAccounts[i] = accounts[i];
-		}
-		accounts = newAccounts;
+	static void addAccountHolder(AccountHolder accountHolder)
+	{
+		accountHolder = new AccountHolder()
+		
+	}
 	
+	static AccountHolder[] getAccountHolders()
+	{
+		
 	}
-	accounts[counterA] == accountsHolder);
-	System.out.println("Account Holder #" + counterA);
-	for(int i = 0 i <counterA; i++) {
-		newAccounts[i] = accounts[i];
+	
+	static CDOffering[] getCDOfferings()
+	{
+
 	}
-	accounts = newAccounts;
-}
-	accounts[counterA] = accountHoler;
-	System.out.println("Account Holder #" + counterA);
-	counterA++;
+	
+	static CDOffering getBestCDOffering(double depositAmount)
+	{
+		
+	}
+	
+	static CDOffering getSecondBestCDOffering(double depositAmount)
+	{
+		
+	}
+	
+	static void clearCDOffering()
+	{
+		
+	}
+	
+	static void setCDOfferings(CDOffering[] offerings)
+	{
+		
+	}
+	
+	static long getNextAccountNumber()
+	{
+		long acctNum = nextAccountNumber;
+		nextAccountNumber++;
+		return acctNum;
+	}
+	
+	static double totalBalances()
+	{
+		
+	}
+	
+	static double futureValue(double presentValue, double interestRate int term)
+	{
+		
+	}
+	
 }
